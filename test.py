@@ -15,9 +15,9 @@ import json
 class InputError(Exception):
     pass
 def simple_mail_transaction(email):
-    sender_add = '21bcm055creditcarddetection@gmail.com'  # storing the sender's mail id
+    sender_add = XXXX  # storing the sender's mail id
     receiver_add = email  # storing the receiver's mail id
-    password = 'lbrx ocwj qpdc etfn'  # storing the password to log in
+    password = XXXX  # storing the password to log in
     # creating the SMTP server object by giving SMPT server address and port number
     smtp_server = smtplib.SMTP("smtp.gmail.com", 587)
     smtp_server.ehlo()  # setting the ESMTP protocol
@@ -27,15 +27,15 @@ def simple_mail_transaction(email):
     SUBJECT = 'Status of your Current transaction'
     msg_to_be_sent = '''ALERT!
 
-                    . Your Current transaction is seems to be fraudalent.
-                    . Submitted Credited Card features is predicted to be a fraudalent by this model with it's 95% accuracy.
-                    . Kindly Provide all the necessary documents asked by your respective Bank. Generally they ask for copy of front of credit card and FIR copy. Bank will now investigate the transaction and in meantime they will immediately restore the credit limit of your card for fraudulent transaction.After completing their investigation, bank will let you know the outcome.
+                        . Your Current transaction is seems to be fraudalent.
+                        . Submitted Credited Card features is predicted to be a fraudalent by this model with it's 95% accuracy.
+                        . Kindly Provide all the necessary documents asked by your respective Bank. Generally they ask for copy of front of credit card and FIR copy. Bank will now investigate the transaction and in meantime they will immediately restore the credit limit of your card for fraudulent transaction.After completing their investigation, bank will let you know the outcome.
 
-                    . For further Informations kindly refer below link
-                    https://www.financialexpress.com/money/credit-card-fraud-rbi-steps-in-to-protect-customers-but-here-is-what-you-must-do-to-avoid-losses/753759/
+                        . For further Informations kindly refer below link
+                        https://www.financialexpress.com/money/credit-card-fraud-rbi-steps-in-to-protect-customers-but-here-is-what-you-must-do-to-avoid-losses/753759/
 
-                    <Thankyou for Using 21BCM055 S.Vignesh Kanna's Credit Card Fraud detection Model>
-                    '''
+                        <Thankyou for Using 21BCM055 S.Vignesh Kanna's Credit Card Fraud detection Model>
+                        '''
     msg_to_be_sent = 'Subject: {}\n\n{}'.format(SUBJECT, msg_to_be_sent)
     # sending the mail by specifying the from and to address and the message
     smtp_server.sendmail(sender_add, receiver_add, msg_to_be_sent)
@@ -93,8 +93,7 @@ def fraud_detection(d):
         st.text("Invalid Mail Address...")
 
 
-st.set_page_config(page_title="21BCM055's Credit card detection model",page_icon=":credit_card:",layout="wide",initial_sidebar_state="expanded")
-page_bg_img="""
+pip_img="""
 <style>
 [data-testid="stAppViewContainer"]{
 background-image: url("https://t3.ftcdn.net/jpg/04/05/42/40/360_F_405424078_WC4B7won1NJjfzW1ALW19tX1xf9WKWmg.jpg");
@@ -122,14 +121,14 @@ if choice == "Customised detection":
         def load_lottiefile(filepath: str):
             with open(filepath, "r") as f:
                 return json.load(f)
-        lottie_coding = load_lottiefile("C:\\Users\\Pranesh\\PycharmProjects\\pythonProject2\\animation_lnlwqm4g.json")
+        lottie_coding = load_lottiefile('''lottie file path''')
         st_lottie(lottie_coding,speed=1,reverse=False,loop=False,quality="high",height=100,width=100,key=None,)
         st.success("file saved")
         view_data=st.button("view data")
         d=pd.read_csv(data_file)
         if view_data:
             st.dataframe(d)
-        st.write("Bar plot Visualisation to examine Outliers")
+        st.write("Box plot Visualisation to examine Outliers")
         select = (d.columns)
         choices = st.sidebar.selectbox("Box Plot", select)
         d[choices].plot(kind='box', title=choices)
