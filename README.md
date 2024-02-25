@@ -1,6 +1,6 @@
 # CreditCard-Fraud-Detection-Model
 
-CreditCard-Fraud-Detection model applies the logistic regression algorithm to predict the likelihood of a credit card transaction being fraudulent based on various features associated with transaction.
+CreditCard-Fraud-Detection model applies the logistic regression algorithm to predict the likelihood of a credit card transaction being fraudulent based on various features associated with transaction.This model will predict, whether the particular transaction is legitimate or fraudulent. The Predicted Outcomes will be displayed to the users through webapp developed in the Streamlit framework
 
 # Dataset
 
@@ -20,10 +20,10 @@ Nowadays Credit Card usage has been drastically increased across the world, now 
 
 # output
 
-Detecting fraud transactions with inbuilt dataset
+Detection with standard source
 
 https://github.com/VigneshKannaS/Credit-Card-Fraud-Detection-Model/assets/140902653/c6b37d2b-ff4f-4cc8-9044-77c01f13b0d0
 
-Detecting fraud transactions with user's dataset
+Detection with user's source
 
 https://github.com/VigneshKannaS/Credit-Card-Fraud-Detection-Model/assets/140902653/a00721db-4214-48b8-aa2e-92b49b8d391a
