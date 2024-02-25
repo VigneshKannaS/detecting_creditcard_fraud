@@ -14,7 +14,7 @@ dataset : https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
 
 # motto
 
-To Detect the CreditCard fraud detection transaction with it's necessary features by employing MachineLearning technology.
+To Detect the CreditCard fraud transaction with it's necessary features by employing MachineLearning technology.
 
 Nowadays Credit Card usage has been drastically increased across the world, now people believe in going cashless and are completely dependent on online transactions. A huge number of dollars of loss are caused every year by the criminals. The PWC  global economy crime survey of 2017 suggests that approximately 48% of organizations experienced economic crime. Therefore, there's positively a necessity to unravel the matter of credit card fraud detection.
 
