@@ -5,19 +5,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import streamlit as st
-from streamlit_lottie import st_lottie
 import smtplib
 import re
 import os
-import plotly.express as px
-import json
-
+import time
 class InputError(Exception):
     pass
 def simple_mail_transaction(email):
-    sender_add = XXXX  # storing the sender's mail id
+    sender_add = '21bcm055creditcarddetection@gmail.com'  # storing the sender's mail id
     receiver_add = email  # storing the receiver's mail id
-    password = XXXX  # storing the password to log in
+    password = 'lbrx ocwj qpdc etfn'  # storing the password to log in
     # creating the SMTP server object by giving SMPT server address and port number
     smtp_server = smtplib.SMTP("smtp.gmail.com", 587)
     smtp_server.ehlo()  # setting the ESMTP protocol
@@ -85,15 +82,17 @@ def fraud_detection(d):
                     st.write("fraudulent transaction")
                     simple_mail_transaction(email)
         except InputError:
-            st.write("this must be of 30 features...  but it has {} features".format(len(input_df_splited)))
+            st.warning("this should have 30 features...  but it has {} features".format(len(input_df_splited)))
         except ValueError:
-            st.write("Invalid Input type...")
+            st.error("Invalid Input type...")
 
     elif (email):
-        st.text("Invalid Mail Address...")
+        st.error("Invalid Mail Address...")
 
 
-pip_img="""
+st.set_page_config(page_title="CreditCard Fraud Detection",page_icon=":credit_card:",layout="wide",initial_sidebar_state="expanded")
+
+page_bg_img="""
 <style>
 [data-testid="stAppViewContainer"]{
 background-image: url("https://t3.ftcdn.net/jpg/04/05/42/40/360_F_405424078_WC4B7won1NJjfzW1ALW19tX1xf9WKWmg.jpg");
@@ -103,36 +102,28 @@ background-size: cover;
 """
 st.markdown(page_bg_img,unsafe_allow_html=True)
 
-dataset=["Standard detection","Customised detection"]
+dataset=["Detection with Standard Source","Detection with User's Source"]
 choice=st.sidebar.selectbox("Dataset",dataset)
-if choice=="Standard detection":
+if choice=="Detection with Standard Source":
     data ='creditcard.csv'
     d=pd.read_csv(data)
     fraud_detection(d)
-    # separate legitimate and fraudulent transactions
 
-if choice == "Customised detection":
+if choice == "Detection with User's Source":
     st.subheader("Post Your DataSet")
     st.subheader("upload a dataset which should contains the relevant data fields,about the transactions")
     data_file = st.file_uploader("upload csv", type=["csv"])
     if data_file is not None:
-        with open(os.path.join("tempDir",data_file.name),'wb') as f:
+        with open(os.path.join("datasets",data_file.name),'wb') as f:
             f.write(data_file.getbuffer())
-        def load_lottiefile(filepath: str):
-            with open(filepath, "r") as f:
-                return json.load(f)
-        lottie_coding = load_lottiefile('''lottie file path''')
-        st_lottie(lottie_coding,speed=1,reverse=False,loop=False,quality="high",height=100,width=100,key=None,)
+        
+        with st.spinner("loading csv..."):
+            time.sleep(3)
         st.success("file saved")
         view_data=st.button("view data")
         d=pd.read_csv(data_file)
         if view_data:
             st.dataframe(d)
-        st.write("Box plot Visualisation to examine Outliers")
-        select = (d.columns)
-        choices = st.sidebar.selectbox("Box Plot", select)
-        d[choices].plot(kind='box', title=choices)
-        st.write(plt.gcf())
         fraud_detection(d)
 
 hide_st_style="""
