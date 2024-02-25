@@ -20,7 +20,10 @@ Nowadays Credit Card usage has been drastically increased across the world, now 
 
 # output
 
-Detecting fraud transaction with inbuilt dataset
+Detecting fraud transactions with inbuilt dataset
 
 https://github.com/VigneshKannaS/Credit-Card-Fraud-Detection-Model/assets/140902653/c6b37d2b-ff4f-4cc8-9044-77c01f13b0d0
 
+Detecting fraud transactions with user's dataset
+
+https://github.com/VigneshKannaS/Credit-Card-Fraud-Detection-Model/assets/140902653/a00721db-4214-48b8-aa2e-92b49b8d391a
