@@ -83,8 +83,10 @@ def fraud_detection(d):
                 else:
                     st.write("fraudulent transaction")
                     simple_mail_transaction(email)
+       
         except InputError:
             st.warning("this should have 30 features...  but it has {} features".format(len(input_df_splited)))
+        
         except ValueError:
             st.error("Invalid Input type...")
 
@@ -116,11 +118,12 @@ if choice == "Detection with User's Source":
     st.subheader("upload a dataset which should contains the relevant data fields,about the transactions")
     data_file = st.file_uploader("upload csv", type=["csv"])
     if data_file is not None:
-        with open(os.path.join("datasets",data_file.name),'wb') as f:
+        with open(os.path.join("datasets",data_file.name),'wb') as f: #'datasets' folder has to be created for to get stored user's dataset
             f.write(data_file.getbuffer())
         
         with st.spinner("loading csv..."):
             time.sleep(3)
+        
         st.success("file saved")
         view_data=st.button("view data")
         d=pd.read_csv(data_file)
