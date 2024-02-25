@@ -9,12 +9,15 @@ import smtplib
 import re
 import os
 import time
+
 class InputError(Exception):
     pass
+
 def simple_mail_transaction(email):
-    sender_add = '21bcm055creditcarddetection@gmail.com'  # storing the sender's mail id
+    sender_add = xxxxx@xxxx  # storing the sender's mail id
+    #give your mail ID for sending alert message to the end users (note: sender's mailID account must be configured to allow 'less secure apps'
     receiver_add = email  # storing the receiver's mail id
-    password = 'lbrx ocwj qpdc etfn'  # storing the password to log in
+    password = xxxxx  # storing the password to log in
     # creating the SMTP server object by giving SMPT server address and port number
     smtp_server = smtplib.SMTP("smtp.gmail.com", 587)
     smtp_server.ehlo()  # setting the ESMTP protocol
