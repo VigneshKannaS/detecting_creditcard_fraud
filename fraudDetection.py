@@ -86,7 +86,7 @@ def fraudDetection(d,choice,numberOfCol,fraudulent,legitimate):
     # web app
     st.title("Credit Card Fraud Detection Model")
     condition_mailid = "^[a-z]+[\._]?[a-z 0-9]+[@]\w+[.]\w{2,3}$"
-    email = st.text_input('enter your email is:')
+    email = st.text_input('enter your email address:')
     if re.search(condition_mailid, email):
         try:
             input_df = st.text_input('Enter all input features values[{}]:'.format(numberOfCol))
