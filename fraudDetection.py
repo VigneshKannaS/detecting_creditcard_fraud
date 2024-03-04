@@ -13,8 +13,8 @@ import csv
 class InputError(Exception):
     pass
 def simple_mail_transaction(email):
-    sender_add = 'xxxx@gmail.com'  # storing the sender's mail id
-    #give your mail ID for sending alert message to the end users (note: sender's mailID account must be configured to allow 'less secure apps')
+    sender_add = 'xxxxx@gmail.com'  # storing the sender's mail id
+    #give your mail ID for sending alert message to the end users (note: sender's mailID account must be configured to allow 'less secured apps')
     receiver_add = email  # storing the receiver's mail id
     password = 'XXXX XXXX XXXX XXXX'  # storing the password to log in
 
@@ -26,8 +26,8 @@ def simple_mail_transaction(email):
         smtp_server.ehlo()  # calling the ehlo() again as encryption happens on calling startttls()
         smtp_server.login(sender_add, password)  # logging into out email id
         SUBJECT = 'Status of your Current transaction'
-        msg_to_be_sent = ''' print a message so that the end user get notified about their recent transaction'''
-        
+        msg_to_be_sent = '''print a message so that the end user get notified about their recent transaction'''
+
         msg_to_be_sent = 'Subject: {}\n\n{}'.format(SUBJECT, msg_to_be_sent)
         # sending the mail by specifying the from and to address and the message
         smtp_server.sendmail(sender_add, receiver_add, msg_to_be_sent)
@@ -127,7 +127,7 @@ st.markdown(page_bg_img,unsafe_allow_html=True)
 dataset=["Detection with Standard Source","Detection with User's Source"]
 choice=st.sidebar.selectbox("Dataset",dataset)
 if choice=="Detection with Standard Source":
-    data ='datasets/builtIn/creditcard.csv'
+    data ='builtInSource/creditcard.csv'
     with open(data) as f:
         dataCol= list(csv.reader(f))
     numberOfCol = len(dataCol[0])-1
@@ -142,12 +142,12 @@ if choice == "Detection with User's Source":
         st.subheader("Please upload a dataset containing relevant datafields about transactions, with the target variable specified as 'Class'")
         data_file = st.file_uploader("upload csv", type=["csv"])
         if data_file is not None:
-            with open(os.path.join("datasets/Uploads", data_file.name), 'wb') as f:
+            with open(os.path.join("uploadedSource", data_file.name), 'wb') as f:
                 f.write(data_file.getbuffer())
 
             clearData=st.sidebar.button("discard source")
             if clearData:
-                os.remove("datasets/Uploads/"+data_file.name)
+                os.remove("uploadedSource/"+data_file.name)
                 st.success(data_file.name+" has been successfully removed")
                 st.stop()
 
@@ -155,7 +155,7 @@ if choice == "Detection with User's Source":
                 time.sleep(3)
             st.success("file saved")
             view_data = st.button("view source")
-            with open(os.path.join("datasets/Uploads", data_file.name), 'r') as f:
+            with open(os.path.join("uploadedSource", data_file.name), 'r') as f:
                 dataCol = list(csv.reader(f))
             numberOfCol = len(dataCol[0]) - 1
             d = pd.read_csv(data_file)
