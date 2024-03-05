@@ -13,10 +13,10 @@ import csv
 class InputError(Exception):
     pass
 def simple_mail_transaction(email):
-    sender_add = 'xxxxx@gmail.com'  # storing the sender's mail id
-    #give your mail ID for sending alert message to the end users (note: sender's mailID account must be configured to allow 'less secured apps')
+    sender_add = XXXX@gmail.com  # storing the sender's mail id
+    #give your mailID for sending alert message to the end user (note: sender's mailID account must be configured to allow 'less secured appa')
     receiver_add = email  # storing the receiver's mail id
-    password = 'XXXX XXXX XXXX XXXX'  # storing the password to log in
+    password = XXXX XXXX XXXX XXXX  # storing the password to log in
 
     try:
         # creating the SMTP server object by giving SMPT server address and port number
@@ -25,9 +25,31 @@ def simple_mail_transaction(email):
         smtp_server.starttls()  # setting up to TLS connection
         smtp_server.ehlo()  # calling the ehlo() again as encryption happens on calling startttls()
         smtp_server.login(sender_add, password)  # logging into out email id
-        SUBJECT = 'Status of your Current transaction'
-        msg_to_be_sent = '''print a message so that the end user get notified about their recent transaction'''
+        SUBJECT = 'Urgent: Alert Regarding Fraudulent Transaction Detected'
+        
+        msg_to_be_sent = '''
+Dear {},
 
+We hope this message finds you well. We are reaching out to inform you of a concerning matter regarding your account.
+
+Our system has detected a potentially fraudulent transaction associated with your account.
+
+The transaction in question appears to be inconsistent with your typical spending patterns and may indicate fraudulent activity. Consult with your Card Issuer to investigate the matter and to ensure the safety and security of your account.
+
+Please review your recent transactions and verify any unfamiliar activity. If you recognize the transaction in question or suspect any other unauthorized activity on your account, please contact your Card Issuer immediately or financial experts for further assistance.
+
+Additionally, we recommend taking the following steps to safeguard your account:
+
+. Change your account password immediately, ensuring it is strong and unique.
+. Enable two-factor authentication for an added layer of security.
+. Regularly monitor your account activity and report any suspicious transactions promptly.
+. We apologize for any inconvenience this may cause and appreciate your cooperation in resolving this matter swiftly. Our priority is to ensure the integrity and security of your account.
+
+Thank you for your attention to this matter.
+
+Sincerely,
+CreditCardFraud Detection System '''.format(email[0:len(email)-10])
+        
         msg_to_be_sent = 'Subject: {}\n\n{}'.format(SUBJECT, msg_to_be_sent)
         # sending the mail by specifying the from and to address and the message
         smtp_server.sendmail(sender_add, receiver_add, msg_to_be_sent)
@@ -99,9 +121,9 @@ def fraudDetection(d,choice,numberOfCol,fraudulent,legitimate):
                 prediction = model.predict(features.reshape(1, -1))
 
                 if prediction[0] == legitimate:
-                    st.subheader("legitimate transaction")
+                    st.subheader("legitimate transaction",anchor=False)
                 else:
-                    st.subheader("fraudulent transaction")
+                    st.subheader("fraudulent transaction",anchor=False)
                     simple_mail_transaction(email)
         except InputError:
             st.warning("this was expected to have {} features, yet it has {} features...".format(numberOfCol,len(input_df_splited)))
