@@ -98,7 +98,7 @@ def fraudDetection(d,choice,numberOfCol,fraudulent,legitimate):
                 features = np.asarray(input_df_splited, dtype=np.float64)
                 prediction = model.predict(features.reshape(1, -1))
 
-                if prediction[0] == 0:
+                if prediction[0] == legitimate:
                     st.subheader("legitimate transaction")
                 else:
                     st.subheader("fraudulent transaction")
