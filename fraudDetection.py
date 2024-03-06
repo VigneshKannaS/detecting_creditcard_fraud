@@ -48,7 +48,7 @@ Additionally, we recommend taking the following steps to safeguard your account:
 Thank you for your attention to this matter.
 
 Sincerely,
-CreditCardFraud Detection System '''.format(email[0:len(email)-10])
+CreditCardFraud Detection System '''.format(email[0:email.rindex('@')])
         
         msg_to_be_sent = 'Subject: {}\n\n{}'.format(SUBJECT, msg_to_be_sent)
         # sending the mail by specifying the from and to address and the message
