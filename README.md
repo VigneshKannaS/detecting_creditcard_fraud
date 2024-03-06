@@ -22,7 +22,7 @@ Credit card usage has increased dramatically worldwide. People now prefer going 
 
 Detection with standard source
 
-https://github.com/VigneshKannaS/Credit-Card-Fraud-Detection-Model/assets/140902653/c6b37d2b-ff4f-4cc8-9044-77c01f13b0d0
+https://youtu.be/yIE0fAppn4o?si=24EGwZ0zy54EGfki
 
 Detection with user's source
 
