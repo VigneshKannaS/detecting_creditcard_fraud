@@ -28,7 +28,7 @@ def simple_mail_transaction(email):
         SUBJECT = 'Urgent: Alert Regarding Fraudulent Transaction Detected'
         
         msg_to_be_sent = '''
-Dear {},
+Hello {},
 
 We hope this message finds you well. We are reaching out to inform you of a concerning matter regarding your account.
 
