@@ -12,7 +12,7 @@ import time
 import csv
 class InputError(Exception):
     pass
-def simple_mail_transaction(email):
+'''def simple_mail_transaction(email):
     sender_add = XXXX@gmail.com  # storing the sender's mail id
     #give your mailID for sending alert message to the end user (note: sender's mailID account must be configured to allow 'less secured appa')
     receiver_add = email  # storing the receiver's mail id
@@ -27,7 +27,7 @@ def simple_mail_transaction(email):
         smtp_server.login(sender_add, password)  # logging into out email id
         SUBJECT = 'Urgent: Alert Regarding Fraudulent Transaction Detected'
         
-        msg_to_be_sent = '''
+        msg_to_be_sent = ''' '''
 Hello {},
 
 We hope this message finds you well. We are reaching out to inform you of a concerning matter regarding your account.
@@ -48,7 +48,7 @@ Additionally, we recommend taking the following steps to safeguard your account:
 Thank you for your attention to this matter.
 
 Sincerely,
-CreditCardFraud Detection System '''.format(email[0:email.rindex('@')])
+CreditCardFraud Detection System ''' '''.format(email[0:email.rindex('@')])
         
         msg_to_be_sent = 'Subject: {}\n\n{}'.format(SUBJECT, msg_to_be_sent)
         # sending the mail by specifying the from and to address and the message
@@ -61,7 +61,7 @@ CreditCardFraud Detection System '''.format(email[0:email.rindex('@')])
     except socket.gaierror as e:
         st.error("Error: unable to resolve hostname to IP address")
         st.error(e)  # Printing the error message
-        st.warning("This may occur while you're in offline")
+        st.warning("This may occur while you're in offline") '''
 
 def targetVariableSpecification(d,choice,numberOfCol):
     legitfraud = st.radio(
