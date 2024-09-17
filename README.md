@@ -7,7 +7,7 @@ This project focuses on detecting credit card fraud using various machine learni
 ## Project Structure
 
 1. **Dataset**: The dataset used for this project is highly imbalanced, containing a significant proportion of non-fraudulent transactions compared to fraudulent ones.
-2. **Models**: Eight different models were developed to address the fraud detection problem, each with variations in handling outliers and model fitting.
+2. **Models**: Seven different models were developed to address the fraud detection problem, each with variations in handling outliers and model fitting.
 
 ## Model Versions
 
