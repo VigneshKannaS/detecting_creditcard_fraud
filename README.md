@@ -13,9 +13,9 @@ This project focuses on detecting credit card fraud using various machine learni
 
 The project evaluates three versions of models with different handling of outliers:
 
-1. **Underfitted with Outliers Present**: Models trained with the original dataset including outliers.
-2. **Overfitted with Outliers Present**: Models trained with the original dataset including outliers but with overfitting tendencies.
-3. **Overfitted with Outlier Reduction**: Models trained with a reduced set of outliers.
+1. **Model Undersampled with Outliers Present**: The model was trained with undersampled data that includes outliers. 
+2. **Model Oversampled with Outliers Present**: The model was trained with oversampled data that includes outliers.
+3. **Model Oversampled with Outlier Absent**: The model was trained with oversampled data that excludes outliers
 
 ### Final Approach
 
@@ -32,8 +32,8 @@ After analyzing the results, it was observed that outliers contain significant i
 ## Dataset
 
 - **Source**: [https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud]
-- **Features**: [Brief description of features used]
-- **Label**: Fraudulent or non-fraudulent transaction indicator
+- **Features**: [Time, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16, V17, V18, V19, V20, V21, V22, V23, V24, V25, V26, V27, V28, Amount]
+- **Label**: 0 -> Legitimate Transaction, 1 -> Fraudulent Transaction
 
 ## Model Training and Evaluation
 
