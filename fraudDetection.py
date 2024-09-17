@@ -223,7 +223,7 @@ if __name__ == "__main__":
                 st.error(e)
             
         st.sidebar.subheader("Get Model")
-        st.sidebar.download_button( label = "get "+model, data = 'Models/modelLR1.pkl', file_name = "modelLR1.pkl", mime = "application/octet-stream")
+        st.sidebar.download_button( label = "get "+model, data = 'Models/'+model, file_name = model, mime = "application/octet-stream")
     
     st.sidebar.subheader("Description of Dataset Features")
     st.sidebar.markdown("*The dataset consists solely of numerical input variables resulting from a PCA transformation. Due to confidentiality concerns,\
