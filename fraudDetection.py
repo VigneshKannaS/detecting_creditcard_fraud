@@ -175,9 +175,9 @@ if __name__ == "__main__":
     if task == "Fraud Detection":
         st.title('Credit Card Fraud Detection', anchor = False)
     
-        modelLists = [ 'Logistic Regression on underfitted data', 'Logistic Regression on overfitted data', 'Decision Tree model on underfitted data',\
-                     'Decision Tree on overfitted data', 'Random Forest on underfitted data', 'Random Forest on overfitted data',\
-                     'Support Vector Machine on underfitted data' ]
+        modelLists = [ 'Logistic Regression on undersampled data', 'Logistic Regression on oversampled data', 'Decision Tree model on undersampled data',\
+                     'Decision Tree on oversampled data', 'Random Forest on undersampled data', 'Random Forest on oversampled data',\
+                     'Support Vector Machine on undersampled data' ]
     
         modelChoice = st.sidebar.selectbox('Classification Models', modelLists)
     
