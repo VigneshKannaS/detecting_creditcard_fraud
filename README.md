@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project focuses on detecting credit card fraud using various machine learning models. Given the highly imbalanced nature of the dataset, the project explores different approaches to handle outliers and model performance.
+This project focuses on detecting credit card fraud using various machine learning models. Given the highly imbalanced nature of the dataset, the project explores different approaches to handle Imbalancement and model performance.
 
 ## Project Structure
 
@@ -37,9 +37,8 @@ After analyzing the results, it was observed that outliers contain significant i
 
 ## Model Training and Evaluation
 
-- **Metrics Used**: Accuracy, Precision, Recall, F1 Score, ROC-AUC
-- **Evaluation**: The models were evaluated using cross-validation and performance metrics to ensure robustness and reliability.
-
+- **Metrics Used**: accuracy_score, Precision, Recall, F1 Score, confusion matrix
+- **Evaluation**: The models were evaluated using cross-validation, performance metrics, and the time taken for model training to ensure robustness, reliability, and efficiency. Accuracy score, F1 score, precision, and recall were used to assess the models' performance, while k-fold cross-validation was employed to validate their stability. Additionally, the time required for training each model was measured to gauge efficiency.
 ## How to Run
 
 1. **Clone the Repository**
@@ -62,7 +61,7 @@ After analyzing the results, it was observed that outliers contain significant i
 
 ## Results
 
-The final models were evaluated based on their performance in detecting fraudulent transactions, with a focus on balancing precision and recall due to the imbalanced nature of the dataset.
+The final models were evaluated based on their performance in detecting fraudulent transactions. All models demonstrated strong capabilities in identifying fraudulent transactions, with performance metrics exceeding 85%.
 
 ## Contributions
 
@@ -72,7 +71,3 @@ The final models were evaluated based on their performance in detecting fraudule
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- [Any references or acknowledgments]
