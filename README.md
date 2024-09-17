@@ -1,29 +1,78 @@
-# CreditCard-Fraud-Detection-Model
+# Credit Card Fraud Detection
 
-CreditCard-Fraud-Detection model applies the logistic regression algorithm to predict the likelihood of a credit card transaction being fraudulent based on various features associated with transaction.This model will predict, whether the particular transaction is legitimate or fraudulent. The Predicted Outcomes will be displayed to the users through webapp developed in the Streamlit framework
+## Overview
 
-# Dataset
+This project focuses on detecting credit card fraud using various machine learning models. Given the highly imbalanced nature of the dataset, the project explores different approaches to handle outliers and model performance.
 
-The dataset contains transactions made by credit cards in September 2013 by European cardholders.
+## Project Structure
 
-This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions.
+1. **Dataset**: The dataset used for this project is highly imbalanced, containing a significant proportion of non-fraudulent transactions compared to fraudulent ones.
+2. **Models**: Eight different models were developed to address the fraud detection problem, each with variations in handling outliers and model fitting.
 
-It contains only numerical input variables which are the result of a PCA transformation. Unfortunately, due to confidentiality issues, we cannot provide the original features and more background information about the data. Features V1, V2, … V28 are the principal components obtained with PCA, the only features which have not been transformed with PCA are 'Time' and 'Amount'. Feature 'Time' contains the seconds elapsed between each transaction and the first transaction in the dataset. The feature 'Amount' is the transaction Amount, this feature can be used for example-dependant cost-sensitive learning. Feature 'Class' is the response variable and it takes value 1 in case of fraud and 0 otherwise.
+## Model Versions
 
-dataset : https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+The project evaluates three versions of models with different handling of outliers:
 
-# motto
+1. **Underfitted with Outliers Present**: Models trained with the original dataset including outliers.
+2. **Overfitted with Outliers Present**: Models trained with the original dataset including outliers but with overfitting tendencies.
+3. **Overfitted with Outlier Reduction**: Models trained with a reduced set of outliers.
 
-To detect credit card fraud transactions with their necessary features by employing machine learning technology. 
+### Final Approach
 
-Credit card usage has increased dramatically worldwide. People now prefer going cashless and rely heavily on online transactions. Criminals cause a significant amount of financial loss each year. According to the PWC Global Economy Crime Survey of 2017, approximately 48% of organizations experienced economic crime. Therefore, there is a pressing need to address the issue of credit card fraud detection.
+After analyzing the results, it was observed that outliers contain significant information about fraudulent transactions. Consequently, the following models were developed using the first two versions:
 
-# output
+- **Logistic Regression 1**
+- **Logistic Regression 2**
+- **Decision Tree Classifier 1**
+- **Decision Tree Classifier 2**
+- **Support Vector Machine**
+- **Random Forest Classifier 1**
+- **Random Forest Classifier 2**
 
-Detection with standard source
+## Dataset
 
-https://youtu.be/yIE0fAppn4o?si=24EGwZ0zy54EGfki
+- **Source**: [https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud]
+- **Features**: [Brief description of features used]
+- **Label**: Fraudulent or non-fraudulent transaction indicator
 
-Detection with user's source
+## Model Training and Evaluation
 
-https://github.com/VigneshKannaS/Credit-Card-Fraud-Detection-Model/assets/140902653/a00721db-4214-48b8-aa2e-92b49b8d391a
+- **Metrics Used**: Accuracy, Precision, Recall, F1 Score, ROC-AUC
+- **Evaluation**: The models were evaluated using cross-validation and performance metrics to ensure robustness and reliability.
+
+## How to Run
+
+1. **Clone the Repository**
+    ```bash
+    git clone https://github.com/VigneshKannaS/Credit-Card-Fraud-Detection-Model.git
+    cd Credit-Card-Fraud-Detection-Model
+    ```
+
+2. **Install Dependencies**
+    Make sure to have Python installed and set up a virtual environment. Then, install the required packages:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. **Run the Models**
+    Execute the Python script to train and evaluate the models:
+    ```bash
+    python fraudDetection.py
+    ```
+
+## Results
+
+The final models were evaluated based on their performance in detecting fraudulent transactions, with a focus on balancing precision and recall due to the imbalanced nature of the dataset.
+
+## Contributions
+
+- **Author**: Vignesh Kanna S
+- **Date**: 1/07/2023
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Any references or acknowledgments]
