@@ -53,7 +53,7 @@ def fraudDetection(model, standardizedInputData):
     
     else:
         # SVM output class labels based on decision boundaries, not probability scores.
-        return transactionType, 'Cannot Determined', 'Cannot Determined'
+        return transactionType, 0, 0
 
 def insightsAndVisualization():
     data = { "LR Model 1": [0.952381, 0.909091, 0.090909, 0.187476, 0.954315, 0.253808, 0.943075],
@@ -170,21 +170,68 @@ def insightsAndVisualization():
 if __name__ == "__main__":
     st.set_page_config(page_title="CreditCard Fraud Detection Model", page_icon=":credit_card:", layout="wide", initial_sidebar_state="expanded")
     
-    task = st.sidebar.selectbox("Pick a Task to Dive Into", ['Fraud Detection', 'Insights & Visualization'])
+    task = st.sidebar.selectbox("Pick a Task to Dive Into", ['Fraud Detection', 'Explore Models', 'Insights & Visualization'])
+    numberOfFeatures = 30
+
+    modelLists = [ 'Logistic Regression on undersampled data', 'Logistic Regression on oversampled data', 'Decision Tree model on undersampled data',\
+                     'Decision Tree on oversampled data', 'Random Forest on undersampled data', 'Random Forest on oversampled data',\
+                     'Support Vector Machine on undersampled data' ]
+    files = [ 'modelLR1.pkl', 'modelLR2.pkl', 'modelTree1.pkl', 'modelTree2.pkl', 'modelRF1.pkl', 'modelRF2.pkl', 'modelSVM.pkl' ]
 
     if task == "Fraud Detection":
         st.title('Credit Card Fraud Detection', anchor = False)
-    
-        modelLists = [ 'Logistic Regression on undersampled data', 'Logistic Regression on oversampled data', 'Decision Tree model on undersampled data',\
-                     'Decision Tree on oversampled data', 'Random Forest on undersampled data', 'Random Forest on oversampled data',\
-                     'Support Vector Machine on undersampled data' ]
+        inputData = st.text_input(f'Enter all Input features [{numberOfFeatures}]')
+        detect = st.button('Detect')
+        if detect:
+            try:
+                inputData = inputData.split(',')
+                if len(inputData) != numberOfFeatures:
+                    raise inputCount(numberOfFeatures, len(inputData))
+                
+                inputData = list(map(lambda x: float(x), inputData))
+                standardizedInputData = ZScoreTransformation(inputData)
+
+                legitimate = []
+                fraudulent = [[0,0,0,0]]
+
+                for model in files:
+                    transactionType, likelihood, unlikelihood = fraudDetection(model, standardizedInputData)
+                    transactionType = "legitimate transaction" if transactionType == [0] else "fraudulent transaction" if transactionType == [1] else "fraudulent transaction"
+                    if transactionType == "legitimate transaction":
+                        legitimate.append([model, transactionType, likelihood, unlikelihood])
+                    elif transactionType == "fraudulent transaction":
+                        fraudulent.append([model, transactionType, likelihood, unlikelihood])
+                
+                class0Models = len(legitimate)
+                class1Models = len(fraudulent)
+                transactionType = "legitimate transaction" if class0Models > class1Models else "fraudulent transaction" if class0Models > class1Models else 'Equal'
+
+                average_accuracy = sum(inner_list[2] for inner_list in legitimate) / class0Models
+                fraudulence_confidence = sum(inner_list[2] for inner_list in fraudulent) / (class1Models - 1)
+                
+                if transactionType == "legitimate transaction" and average_accuracy >= 70:
+                    st.success(f"With an impressive average confidence of {average_accuracy}%, we confidently assure you that this transaction is both secure and legitimate, as confirmed by multiple models.")
+
+                elif transactionType == "fraudulent transaction":
+                    st.error(f"With an alarming average confidence of {fraudulence_confidence}%, we strongly advise caution regarding this transaction, as multiple models have flagged it as potentially fraudulent.")
+
+                elif transactionType == "legitimate transaction" and average_accuracy < 70:
+                    st.warning(f'''Although we affirm the legitimacy of this transaction with {average_accuracy}% average certainty, it remains at the edge of our confidence threshold, with a {fraudulence_confidence}% unlikelihood.
+                          It is advisable to remain in the safe zone by taking necessary precautionary measures.''')
+                    
+                else:
+                    st.error("Something went wrong...")
+                
+            except inputCount as e:
+                st.error(e)       
+
+    if task == "Explore Models":
+        st.title('Credit Card Fraud Detection', anchor = False)
+        st.subheader('Get in the Know: Uncovering Results from Every Model!', anchor = False)
     
         modelChoice = st.sidebar.selectbox('Classification Models', modelLists)
-    
-        files = [ 'modelLR1.pkl', 'modelLR2.pkl', 'modelTree1.pkl', 'modelTree2.pkl', 'modelRF1.pkl', 'modelRF2.pkl', 'modelSVM.pkl' ]
         model = files[modelLists.index(modelChoice)]
 
-        numberOfFeatures = 30
         inputData = st.text_input(f'Enter all Input features [{numberOfFeatures}]')
         detect = st.button('Detect')
         if detect:
