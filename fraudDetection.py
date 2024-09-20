@@ -11,7 +11,7 @@ class inputCount(Exception):
         self.expected_length = expected_length
         self.actual_length = actual_length
         self.message = f"this was expected to have {expected_length} features, yet it has {actual_length} features"
-        super().__init__(self.message)
+        super().__init__(self.message)     
 
 # Standardized the data by applying the Z-score formula.
 def ZScoreTransformation(inputData):
@@ -185,7 +185,7 @@ if __name__ == "__main__":
         if detect:
             try:
                 inputData = inputData.split(',')
-                if len(inputData) != numberOfFeatures:
+                if len(inputData) != numberOfFeatures and inputData == " ":
                     raise inputCount(numberOfFeatures, len(inputData))
                 
                 inputData = list(map(lambda x: float(x), inputData))
@@ -207,20 +207,24 @@ if __name__ == "__main__":
                 transactionType = "legitimate transaction" if class0Models > class1Models else "fraudulent transaction" if class0Models > class1Models else 'Equal'
 
                 average_accuracy = sum(inner_list[2] for inner_list in legitimate) / class0Models
-                fraudulence_confidence = sum(inner_list[2] for inner_list in fraudulent) / (class1Models - 1)
                 
                 if transactionType == "legitimate transaction" and average_accuracy >= 70:
                     st.success(f"With an impressive average confidence of {average_accuracy}%, we confidently assure you that this transaction is both secure and legitimate, as confirmed by multiple models.")
 
                 elif transactionType == "fraudulent transaction":
+                    fraudulence_confidence = sum(inner_list[2] for inner_list in fraudulent) / (class1Models - 1)
                     st.error(f"With an alarming average confidence of {fraudulence_confidence}%, we strongly advise caution regarding this transaction, as multiple models have flagged it as potentially fraudulent.")
 
                 elif transactionType == "legitimate transaction" and average_accuracy < 70:
+                    fraudulence_confidence = sum(inner_list[2] for inner_list in fraudulent) / (class1Models - 1)
                     st.warning(f'''Although we affirm the legitimacy of this transaction with {average_accuracy}% average certainty, it remains at the edge of our confidence threshold, with a {fraudulence_confidence}% unlikelihood.
                           It is advisable to remain in the safe zone by taking necessary precautionary measures.''')
                     
                 else:
-                    st.error("Something went wrong...")
+                    st.error("Oops! We hit a snag—an invalidity has been detected!")
+
+            except ValueError as e:
+                st.error("Oops! We hit a snag—an invalidity has been detected! Please check your input format for accuracy!")
                 
             except inputCount as e:
                 st.error(e)       
@@ -237,8 +241,9 @@ if __name__ == "__main__":
         if detect:
             try:
                 inputData = inputData.split(',')
-                if len(inputData) != numberOfFeatures:
+                if len(inputData) != numberOfFeatures and inputData == " ":
                     raise inputCount(numberOfFeatures, len(inputData))
+                
                 inputData = list(map(lambda x: float(x), inputData))
                 standardizedInputData = ZScoreTransformation(inputData)
                 transactionType, likelihood, unlikelihood = fraudDetection(model, standardizedInputData)
@@ -264,7 +269,7 @@ if __name__ == "__main__":
                     st.error("Something went wrong...")
 
             except ValueError as e:
-                st.error(str(e))
+                st.error("Oops! We hit a snag—an invalidity has been detected! Please check your input format for accuracy!")
 
             except inputCount as e:
                 st.error(e)
