@@ -13,6 +13,9 @@ class inputCount(Exception):
         self.message = f"this was expected to have {expected_length} features, yet it has {actual_length} features"
         super().__init__(self.message)     
 
+class emptyError(Exception):
+    pass
+
 # Standardized the data by applying the Z-score formula.
 def ZScoreTransformation(inputData):
     if len(inputData) != 30:
@@ -185,9 +188,12 @@ if __name__ == "__main__":
         if detect:
             try:
                 inputData = inputData.split(',')
-                if len(inputData) != numberOfFeatures and inputData == " ":
-                    raise inputCount(numberOfFeatures, len(inputData))
+                if len(inputData) != numberOfFeatures and inputData[0] == "":
+                    raise emptyError()
                 
+                if len(inputData) != numberOfFeatures and inputData[0] != "":
+                    raise inputCount(numberOfFeatures, len(inputData))
+
                 inputData = list(map(lambda x: float(x), inputData))
                 standardizedInputData = ZScoreTransformation(inputData)
 
@@ -221,11 +227,14 @@ if __name__ == "__main__":
                           It is advisable to remain in the safe zone by taking necessary precautionary measures.''')
                     
                 else:
-                    st.error("Oops! We hit a snag—an invalidity has been detected!")
+                    st.error("Something went Wrong!")
 
             except ValueError as e:
+                st.error(f"Oops! We hit a snag—an invalidity has been detected!")
+            
+            except emptyError as e:
                 st.error("Oops! We hit a snag—an invalidity has been detected! Please check your input format for accuracy!")
-                
+
             except inputCount as e:
                 st.error(e)       
 
@@ -241,7 +250,10 @@ if __name__ == "__main__":
         if detect:
             try:
                 inputData = inputData.split(',')
-                if len(inputData) != numberOfFeatures and inputData == " ":
+                if len(inputData) != numberOfFeatures and inputData[0] == "":
+                    raise emptyError()
+                
+                if len(inputData) != numberOfFeatures and inputData[0] != "":
                     raise inputCount(numberOfFeatures, len(inputData))
                 
                 inputData = list(map(lambda x: float(x), inputData))
@@ -269,8 +281,11 @@ if __name__ == "__main__":
                     st.error("Something went wrong...")
 
             except ValueError as e:
+                st.error(f"Oops! We hit a snag—an invalidity has been detected!")
+            
+            except emptyError as e:
                 st.error("Oops! We hit a snag—an invalidity has been detected! Please check your input format for accuracy!")
-
+                
             except inputCount as e:
                 st.error(e)
             
@@ -310,3 +325,4 @@ if __name__ == "__main__":
     </style>
     """
     st.markdown(hide_st_style, unsafe_allow_html=True)
+#Development is in progress
