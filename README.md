@@ -1,5 +1,5 @@
 # Credit Card Fraud Detection
-
+streamlit applink : https://credit-card-fraud-detection-model-akira.streamlit.app/
 ## Overview
 
 This project focuses on detecting credit card fraud using various machine learning models. Given the highly imbalanced nature of the dataset, the project explores different approaches to handle Imbalancement and model performance.
