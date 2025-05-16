@@ -65,7 +65,7 @@ The final models were evaluated based on their performance in detecting fraudule
 
 ## Contributions
 
-- **Author**: Vignesh Kanna S
+- **Author**: Akira
 - **Date**: 1/07/2023
 
 ## License
